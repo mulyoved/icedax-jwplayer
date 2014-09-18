@@ -6,6 +6,13 @@ angular.module('icedaxJwplayerApp')
     var player;
     $scope.showCarousel = false;
 
+    $scope.imagesIdx = [1,2,3,4,5,6,7,8];
+
+    $scope.imageClick = function(idx) {
+      $log.log('imageClick', idx)
+    };
+
+
     angular.element(document).ready(function () {
       console.log('Document Ready');
 
@@ -38,6 +45,7 @@ angular.module('icedaxJwplayerApp')
         videoGlass.appendTo('#' + videoId);
         console.log('ready', player.getWidth(), player.getHeight(), pc);
 
+
         $scope.$apply(function() {
           $scope.showCarousel = true;
         });
@@ -63,10 +71,11 @@ angular.module('icedaxJwplayerApp')
     };
 
     $scope.glassClick = function($event) {
-      $log.log('Glass click', $event);
-      $scope.showCarousel = false;
+      var pc = angular.element('#pc');
+      $log.log('Glass click', $event.clientX, $event.clientY, pc);
+      //$scope.showCarousel = false;
 
-      player.play(true);
+      //player.play(true);
       //angular.element('#' + videoId).trigger("click", $event);
     };
 
