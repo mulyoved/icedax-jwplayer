@@ -1,0 +1,31 @@
+.jwplayer {
+  position:relative;
+}
+
+.jwplayer .my-modal {
+  width: 90%;
+  height: 20%;
+  position: absolute;
+  //background-color: dimgray;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 45px;
+  opacity: 0.85;
+  text-align: center;
+  z-index: 11; /* 1px higher than the overlay layer */
+}
+
+.jwplayer .my-modal .pa-img {
+  height: 100%;
+  margin-right: 2px;
+}
+
+.p-hidden {
+  visible: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 1s, opacity 1s;
+  -moz-transition: visibility 1s, opacity 1s;
+  -o-transition: visibility 1s, opacity 1s;
+  transition: visibility 1s, opacity 1s;
+}
