@@ -12,8 +12,12 @@ angular.module('icedaxJwplayerApp')
         'link': '/jwplayer-simple'
       },
       {
-        'title': 'Carousel',
+        'title': 'Sleek Carousel',
         'link': '/carousel'
+      },
+      {
+        'title': 'OWL Carousel',
+        'link': '/owlCarousel'
       },
       {
         'title': 'Embeded',
