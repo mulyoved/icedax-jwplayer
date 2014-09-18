@@ -5,13 +5,16 @@
     <div id='playerADWzMGbKsCCQ'>
     </div>
 
-    <div id="pc" class="my-modal">
-        <img class="pa-img" src='http://placehold.it/140x100&text=image1'></img>
-        <img class="pa-img" src='http://placehold.it/140x100&text=image2'></img>
-        <img class="pa-img" src='http://placehold.it/140x100&text=image3'></img>
-        <img class="pa-img" src='http://placehold.it/140x100&text=image4'></img>
-        <img class="pa-img" src='http://placehold.it/140x100&text=image5'></img>
+    <div id="video-glass" class="video-glass" ng-show="showCarousel" ng-click="glassClick($event)">
+        <div id="pc" class="my-modal" ng-click="pcClick($event)">
+            <img class="pa-img" src='http://placehold.it/140x100&text=image1'></img>
+            <img class="pa-img" src='http://placehold.it/140x100&text=image2'></img>
+            <img class="pa-img" src='http://placehold.it/140x100&text=image3'></img>
+            <img class="pa-img" src='http://placehold.it/140x100&text=image4'></img>
+            <img class="pa-img" src='http://placehold.it/140x100&text=image5'></img>
+        </div>
     </div>
+
 
     <h3>API</h3>
     <button ng-click="toggleCarousel()">Toggle Carousel</button>

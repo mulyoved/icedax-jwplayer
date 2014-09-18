@@ -14,7 +14,13 @@ angular.module('icedaxJwplayerApp')
       {
         'title': 'Carousel',
         'link': '/carousel'
+      },
+      {
+        'title': 'Embeded',
+        'link': '/embededVideo'
       }
+
+
     ];
 
     $scope.isCollapsed = true;

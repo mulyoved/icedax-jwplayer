@@ -2,10 +2,13 @@
 
 angular.module('icedaxJwplayerApp')
   .controller('JwplayerSimpleCtrl', function ($scope, $log) {
+    var videoId = 'playerADWzMGbKsCCQ';
+    var player;
+    $scope.showCarousel = false;
+
     angular.element(document).ready(function () {
       console.log('Document Ready');
 
-      var videoId = 'playerADWzMGbKsCCQ';
 
       jwplayer(videoId).setup({
         file: '//www.youtube.com/watch?v=GeLw1iFoXho',
@@ -18,22 +21,58 @@ angular.module('icedaxJwplayerApp')
         function() {
           console.log('Show Products', jwplayer());
           //window.location.href = jwplayer().getPlaylistItem()['file'];
+          $scope.$apply(function() {
+            $scope.showCarousel = true;
+          });
         },
 
         'show-product' //And finally, here we set the unique ID of the button itself.
       );
 
-      var player = jwplayer();
-        player.onReady(function() {
+      player = jwplayer();
+      player.onReady(function() {
         var video = angular.element('#' + videoId);
         var pc = angular.element('#pc');
-        pc.appendTo('#' + videoId);
+        var videoGlass = angular.element('#video-glass');
+        //pc.appendTo('#' + videoId);
+        videoGlass.appendTo('#' + videoId);
         console.log('ready', player.getWidth(), player.getHeight(), pc);
+
+        $scope.$apply(function() {
+          $scope.showCarousel = true;
+        });
+
+        player.onSeek(function player_onSeek(e) {
+          $log.log('onSeek', e);
+        });
+
+
       });
 
+      /*
+      player.onDisplayClick(function() {
+        $log.log('onDisplayClick');
+        $scope.toggleCarousel = false;
+      });
+      */
     });
 
     $scope.toggleCarousel = function() {
-      
-    }
+      $log.log('toggleCarousel');
+      $scope.showCarousel = !$scope.showCarousel;
+    };
+
+    $scope.glassClick = function($event) {
+      $log.log('Glass click', $event);
+      $scope.showCarousel = false;
+
+      player.play(true);
+      //angular.element('#' + videoId).trigger("click", $event);
+    };
+
+    $scope.pcClick = function($event) {
+      $log.log('Carousel Click', $event);
+      $event.stopPropagation();
+    };
+
   });
