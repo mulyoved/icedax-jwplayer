@@ -1,3 +1,5 @@
+$image-frame-size: 3px;
+
 .jwplayer {
   position: relative;
 }
@@ -17,28 +19,35 @@
   z-index: 11; /* 1px higher than the overlay layer */
 }
 
-.jwplayer .my-modal {
+.jwplayer .image-panel {
   width: 90%;
   height: 20%;
   position: absolute;
-  //background-color: dimgray;
   margin: auto;
   left: 0;
   right: 0;
   bottom: 45px;
   opacity: 0.85;
-  text-align: center;
+
+  background-color: orange;
+  padding-left: $image-frame-size;
+  padding-top: $image-frame-size;
+  padding-bottom: $image-frame-size;
+  overflow: hidden;
   z-index: 11; /* 1px higher than the overlay layer */
 }
 
-.jwplayer .my-modal .pa-img {
+.float-wrap {
+  width: 1000px;
   height: 100%;
-  margin-right: 2px;
+  //border:1px solid;
+  /* causes .float-wrap's height to match its child divs */
+  overflow: auto;
 }
 
-.jwplayer .video-glass .pa-img {
+.jwplayer .image-panel .pa-img {
   height: 100%;
-  margin-right: 2px;
+  margin-right: $image-frame-size;
 }
 
 .p-hidden {

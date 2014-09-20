@@ -1,37 +1,24 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="col-md-12">
-    <h1>JWPLayer Embed</h1>
+    <h1>JWPLayer Embed v5</h1>
     <div id='playerADWzMGbKsCCQ'>
     </div>
 
     <div id="video-glass" class="video-glass" ng-show="showCarousel" ng-click="glassClick($event)">
+        <div class="image-panel">
+            <div class="float-wrap">
+                <img ng-repeat="idx in imagesIdx" class="pa-img" ng-click="imageClick(idx, $event)" src='http://placehold.it/100x100&text=image{{idx}}'>
 
-        <slick id="pc" class="my-modal"
-               centerMode="true"
-                focusOnSelect="true"
-                slides-to-show="6"
-                slides-to-scroll="1"
-                arrows="false"
-                >
-
-            <div ng-repeat="idx in imagesIdx">
-                <img class="pa-img" ng-click="imageClick(idx)" src='http://placehold.it/140x100&text=image{{idx}}'></img>
+                </img>
             </div>
-        </slick>
-
-        <!--
-        <div id="pc" class="my-modal" ng-click="pcClick($event)">
-            <img class="pa-img" src='http://placehold.it/140x100&text=image1'></img>
-            <img class="pa-img" src='http://placehold.it/140x100&text=image2'></img>
-            <img class="pa-img" src='http://placehold.it/140x100&text=image3'></img>
-            <img class="pa-img" src='http://placehold.it/140x100&text=image4'></img>
-            <img class="pa-img" src='http://placehold.it/140x100&text=image5'></img>
         </div>
-        -->
     </div>
 
 
     <h3>API</h3>
     <button ng-click="toggleCarousel()">Toggle Carousel</button>
 </div>
+
+<!--
+-->

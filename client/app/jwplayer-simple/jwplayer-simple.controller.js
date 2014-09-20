@@ -6,12 +6,7 @@ angular.module('icedaxJwplayerApp')
     var player;
     $scope.showCarousel = false;
 
-    $scope.imagesIdx = [1,2,3,4,5,6,7,8];
-
-    $scope.imageClick = function(idx) {
-      $log.log('imageClick', idx)
-    };
-
+    $scope.imagesIdx = [1,2,3,4,5,6,7,8,9,10,11];
 
     angular.element(document).ready(function () {
       console.log('Document Ready');
@@ -54,6 +49,13 @@ angular.module('icedaxJwplayerApp')
           $log.log('onSeek', e);
         });
 
+        player.onControls(function onControls(controls) {
+          $log.log('onControls', controls);
+        });
+
+        player.onDisplayClick(function onDisplayClick() {
+          $log.log('onDisplayClick');
+        });
 
       });
 
@@ -70,18 +72,17 @@ angular.module('icedaxJwplayerApp')
       $scope.showCarousel = !$scope.showCarousel;
     };
 
+    $scope.imageClick = function(idx, $event) {
+      $log.log('imageClick', idx)
+      $event.stopPropagation();
+    };
+
     $scope.glassClick = function($event) {
       var pc = angular.element('#pc');
       $log.log('Glass click', $event.clientX, $event.clientY, pc);
-      //$scope.showCarousel = false;
+      $scope.showCarousel = false;
 
       //player.play(true);
       //angular.element('#' + videoId).trigger("click", $event);
     };
-
-    $scope.pcClick = function($event) {
-      $log.log('Carousel Click', $event);
-      $event.stopPropagation();
-    };
-
   });
