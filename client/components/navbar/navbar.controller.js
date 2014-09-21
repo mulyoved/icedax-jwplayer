@@ -22,7 +22,11 @@ angular.module('icedaxJwplayerApp')
       {
         'title': 'Embeded',
         'link': '/embededVideo'
-      }
+      },
+      {
+        'title': 'InsideIFrame',
+        'link': '/embededAsIFrame'
+      },
 
 
     ];

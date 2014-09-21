@@ -5,17 +5,71 @@ angular.module('icedaxJwplayerApp')
     var videoId = 'playerADWzMGbKsCCQ';
     var player;
     $scope.showCarousel = false;
-    $scope.selectedImage = 1;
+    $scope.selectedImage = 0;
 
     $scope.isSelected = function(idx) {
-
-      var ret = (idx === $scope.selectedImage ? 'selected-img' : null);
-      $log.log('isSelected',idx, ret);
-
-      return ret;
+      return (idx === $scope.selectedImage ? 'selected-img' : null);
     };
 
-    $scope.imagesIdx = [1,2,3,4,5,6,7,8,9,10,11];
+    $scope.images = [
+        {
+          imageurl: 'http://placehold.it/100x100&text=image1',
+          position: 30,
+          name: 'Product1',
+          description: 'Product1 Description',
+          url: 'http://www.ebay.com/itm/Apple-iPad-3-3rd-Gen-64GB-Wi-Fi-Retina-Tablet-4G-AT-T-WHITE-MD371LL-A-/171420012066',
+          price: 100
+        },
+        {
+          imageurl: 'http://placehold.it/100x100&text=image2',
+          position: 60,
+          name: 'Product2',
+          description: 'Product2 Description',
+          url: 'http://www.ebay.com/itm/Apple-iPad-3-3rd-Gen-64GB-Wi-Fi-Retina-Tablet-4G-AT-T-WHITE-MD371LL-A-/171420012066',
+          price: 100
+        },
+        {
+          imageurl: 'http://placehold.it/100x100&text=image3',
+          position: 90,
+          name: 'Product3',
+          description: 'Product3 Description',
+          url: 'http://www.ebay.com/itm/Apple-iPad-3-3rd-Gen-64GB-Wi-Fi-Retina-Tablet-4G-AT-T-WHITE-MD371LL-A-/171420012066',
+          price: 100
+        },
+        {
+          imageurl: 'http://placehold.it/100x100&text=image4',
+          position: 120,
+          name: 'Product4',
+          description: 'Product4 Description',
+          url: 'http://www.ebay.com/itm/Apple-iPad-3-3rd-Gen-64GB-Wi-Fi-Retina-Tablet-4G-AT-T-WHITE-MD371LL-A-/171420012066',
+          price: 100
+        },
+        {
+          imageurl: 'http://placehold.it/100x100&text=image5',
+          position: 150,
+          name: 'Product5',
+          description: 'Product5 Description',
+          url: 'http://www.ebay.com/itm/Apple-iPad-3-3rd-Gen-64GB-Wi-Fi-Retina-Tablet-4G-AT-T-WHITE-MD371LL-A-/171420012066',
+          price: 100
+        },
+        {
+          imageurl: 'http://placehold.it/100x100&text=image6',
+          position: 180,
+          name: 'Product6',
+          description: 'Product6 Description',
+          url: 'http://www.ebay.com/itm/Apple-iPad-3-3rd-Gen-64GB-Wi-Fi-Retina-Tablet-4G-AT-T-WHITE-MD371LL-A-/171420012066',
+          price: 100
+        },
+        {
+          imageurl: 'http://placehold.it/100x100&text=image7',
+          position: 210,
+          name: 'Product7',
+          description: 'Product7 Description',
+          url: 'http://www.ebay.com/itm/Apple-iPad-3-3rd-Gen-64GB-Wi-Fi-Retina-Tablet-4G-AT-T-WHITE-MD371LL-A-/171420012066',
+          price: 100
+        }
+      ];
+
 
     angular.element(document).ready(function () {
       console.log('Document Ready');
@@ -49,7 +103,7 @@ angular.module('icedaxJwplayerApp')
 
         //var dock = angular.element('#' + videoId + '_controlbar');
         var dock = angular.element('#video-glass');
-        console.log('ready', player.getWidth(), player.getHeight(), pc);
+        console.log('ready', player.getWidth(), player.getHeight(), player);
 
         showPC(true);
       });
@@ -87,15 +141,29 @@ angular.module('icedaxJwplayerApp')
       });
 
       player.onTime(function onTime(e) {
-        //$log.log('onTime', e.duration, e.position);
-        var selectedIdx = Math.floor(e.position/30);
-        if (selectedIdx != $scope.selectedImage && $scope.imagesIdx.indexOf(selectedIdx)>-1) {
-          $scope.$apply(function() {
-            $scope.selectedImage = selectedIdx;
-          });
+        try {
+          //$log.log('onTime', e.duration, e.position);
+          var pos = e.position;
+          var selectedIdx = 0;
+          for (i = $scope.images.length - 1; i >= 0; i--) {
+            var image = $scope.images[i];
+            if (image.position <= pos) {
+              $log.log('Selected image', i);
+              selectedIdx = i;
+              break;
+            }
+          }
+
+          if (selectedIdx != $scope.selectedImage && selectedIdx > -1) {
+            $scope.$apply(function () {
+              $scope.selectedImage = selectedIdx;
+            });
+          }
+        }
+        catch(err) {
+          $log.error(player.onTime, err);
         }
       });
-
 
       /*
       player.onDisplayClick(function() {
@@ -120,9 +188,16 @@ angular.module('icedaxJwplayerApp')
     $scope.imageClick = function(idx, $event) {
       $log.log('imageClick', idx);
       $event.stopPropagation();
-      $scope.selectedImage = idx;
+      var image = $scope.images[idx];
 
-      player.seek(idx * 30);
+      if ($scope.selectedImage === idx) {
+        $log.log('open external url', image.url);
+        window.open(image.url, '_blank');
+      }
+      else {
+        $scope.selectedImage = idx;
+        player.seek(image.position);
+      }
     };
 
     $scope.glassClick = function($event) {
