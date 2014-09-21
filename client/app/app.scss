@@ -4,6 +4,15 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
 @import 'font-awesome/scss/font-awesome';
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+
 /**
  * App-wide Styles
  */
@@ -18,9 +27,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 // Component styles are injected through grunt
 // injector
 @import 'carousel/carousel.scss';
+@import 'detailPanel/detailPanel.scss';
 @import 'embededVideo/embededVideo.scss';
+@import 'imagePanel/imagePanel.scss';
 @import 'jwplayer-simple/jwplayer-simple.scss';
 @import 'main/main.scss';
-@import 'owlCarousel/owlCarousel.scss';
 @import 'modal/modal.scss';
 // endinjector

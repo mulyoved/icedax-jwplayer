@@ -1,4 +1,5 @@
-$image-frame-size: 3px;
+$image-frame-size: 4px;
+$image-frame-size-half: 2px;
 
 .jwplayer {
   position: relative;
@@ -17,6 +18,7 @@ $image-frame-size: 3px;
   //opacity: 0.15;
   text-align: center;
   z-index: 11; /* 1px higher than the overlay layer */
+  pointer-events: none;
 }
 
 .jwplayer .image-panel {
@@ -30,15 +32,17 @@ $image-frame-size: 3px;
   opacity: 0.85;
 
   background-color: orange;
-  padding-left: $image-frame-size;
   padding-top: $image-frame-size;
   padding-bottom: $image-frame-size;
+  padding-left: $image-frame-size;
+
   overflow: hidden;
   z-index: 11; /* 1px higher than the overlay layer */
+
 }
 
 .float-wrap {
-  width: 1000px;
+  width: 10000px;
   height: 100%;
   //border:1px solid;
   /* causes .float-wrap's height to match its child divs */
@@ -48,7 +52,16 @@ $image-frame-size: 3px;
 .jwplayer .image-panel .pa-img {
   height: 100%;
   margin-right: $image-frame-size;
+
+  pointer-events: auto;
+  cursor: pointer;
+  box-sizing: border-box;
 }
+
+.jwplayer .image-panel .selected-img {
+  border: 3px solid black !important;
+}
+
 
 .p-hidden {
   visible: hidden;

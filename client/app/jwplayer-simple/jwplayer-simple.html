@@ -1,24 +1,27 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="col-md-12">
-    <h1>JWPLayer Embed v5</h1>
+    <h1>JWPLayer Embed v6</h1>
     <div id='playerADWzMGbKsCCQ'>
     </div>
 
     <div id="video-glass" class="video-glass" ng-show="showCarousel" ng-click="glassClick($event)">
         <div class="image-panel">
             <div class="float-wrap">
-                <img ng-repeat="idx in imagesIdx" class="pa-img" ng-click="imageClick(idx, $event)" src='http://placehold.it/100x100&text=image{{idx}}'>
-
+                <img ng-repeat="idx in imagesIdx"
+                     class="pa-img"
+                     ng-class="isSelected(idx)"
+                     ng-click="imageClick(idx, $event)"
+                     src='http://placehold.it/100x100&text=image{{idx}}'>
                 </img>
             </div>
         </div>
     </div>
-
 
     <h3>API</h3>
     <button ng-click="toggleCarousel()">Toggle Carousel</button>
 </div>
 
 <!--
+                     ng-class="isSelected(idx)"
 -->
