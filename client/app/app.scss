@@ -11,8 +11,6 @@ html {
   box-sizing: inherit;
 }
 
-
-
 /**
  * App-wide Styles
  */
@@ -26,8 +24,13 @@ html {
 
 // Component styles are injected through grunt
 // injector
+@import 'account/login/login.scss';
+@import 'admin/admin.scss';
 @import 'carousel/carousel.scss';
 @import 'detailPanel/detailPanel.scss';
+@import 'edit/edit.scss';
+@import 'edit/testPage/testPage.scss';
+@import 'edit/videoEdit/videoEdit.scss';
 @import 'embededAsIFrame/embededAsIFrame.scss';
 @import 'embededVideo/embededVideo.scss';
 @import 'imagePanel/imagePanel.scss';
