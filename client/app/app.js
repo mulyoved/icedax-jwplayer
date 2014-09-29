@@ -8,6 +8,7 @@ angular.module('icedaxJwplayerApp', [
   'ui.bootstrap',
   'angucomplete-alt',
   'schemaForm',
+  '720kb.socialshare',
   'MessageCenterModule'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {

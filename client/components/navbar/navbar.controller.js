@@ -37,7 +37,7 @@ angular.module('icedaxJwplayerApp')
       },
       {
         'title': 'Edit Video',
-        'link': '/edit/videoEdit'
+        'link': '/edit/videoEdit/videoEdit_Select'
       },
       {
         'title': 'Test Page',

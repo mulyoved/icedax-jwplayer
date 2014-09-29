@@ -17,8 +17,9 @@
     "angular-ui-router": "~0.2.10",
     "message-center": "~1.0.2",
     "angucomplete-alt": "~0.0.22",
-    "angular-schema-form": "~0.7.3",
-    "validator-js": "~3.19.0"
+    "angular-schema-form": "https://github.com/mulyoved/angular-schema-form.git#~0.7.3",
+    "validator-js": "~3.19.0",
+    "angular-socialshare": "https://github.com/mulyoved/angular-socialshare.git"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
