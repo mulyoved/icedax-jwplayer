@@ -6,6 +6,7 @@ angular.module('icedaxJwplayerApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
+  'restangular',
   'angucomplete-alt',
   'schemaForm',
   '720kb.socialshare',
@@ -61,9 +62,14 @@ angular.module('icedaxJwplayerApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth, $log) {
+  .run(function ($rootScope, $location, Auth, $log, $urlRouter, $state, $injector) {
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function (event, next, toParams) {
+    $rootScope.$on('$stateChangeStart', function (event, next, toParams, fromState, fromParams) {
+
+      function isResolve(value) {
+        return angular.isObject(value) && value.then;
+      }
+
 
       //console.log('$stateChangeStart to '+next.to+'- fired when the transition begins. toState,toParams : \n',next, toParams);
       Auth.isLoggedInAsync(function(loggedIn) {
@@ -71,6 +77,24 @@ angular.module('icedaxJwplayerApp', [
           $location.path('/login');
         }
       });
+
+      if (next.onExitResolve) {
+        next.ignoreOnExitResolve = false;
+      }
+
+      if (fromState.onExitResolve && !fromState.ignoreOnExitResolve) {
+        $log.log('Handling onExitResolve', next, fromState, fromParams);
+        var resolve = $injector.invoke(fromState.onExitResolve);
+        if (isResolve(resolve)) {
+          $log.log('Handling onExitResolve Return promise', resolve);
+          event.preventDefault();
+          resolve.then(function(answer) {
+            $log.log('Handling onExitResolve - sync', next, toParams);
+            fromState.ignoreOnExitResolve = true;
+            $state.go(next);
+          });
+        }
+      }
     });
 
     /* debug ui-router
@@ -113,4 +137,10 @@ angular.module('icedaxJwplayerApp', [
       console.log("routeUpdate", rootScope);
     });
     */
+  })
+  .config(function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('/api');
+    RestangularProvider.setRestangularFields({
+      id: "_id"
+    });
   });

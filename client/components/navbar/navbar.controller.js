@@ -32,6 +32,10 @@ angular.module('icedaxJwplayerApp')
         'link': '/embededVideo'
       },
       {
+        'title': 'Embeded DB',
+        'link': '/embededVideoDB/543c133852e49e6821672e93'
+      },
+      {
         'title': 'InsideIFrame',
         'link': '/embededAsIFrame'
       },
