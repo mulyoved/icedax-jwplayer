@@ -28,3 +28,8 @@ $btnGithubBackgroundHighlight:      #ccc;
 .btn-github {
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
+
+
+.space-left {
+  padding-left: 16px;
+}

@@ -2,7 +2,7 @@
 
 angular.module('icedaxJwplayerApp')
   .controller('VideoeditProductsCtrl', function ($scope, $log, $location, videoData) {
-    $scope.selectedImage = 0;
+    $scope.selectedImage = -1;
     $scope.items = videoData.data.items;
 
     $scope.isSelected = function(idx) {
@@ -14,6 +14,7 @@ angular.module('icedaxJwplayerApp')
     };
 
     function setSelectedImage(idx) {
+      $log.log('setSelectedImage', idx);
       $scope.selectedImage = idx;
       $scope.model = videoData.data.items[idx];
       $scope.masterCopy = angular.copy($scope.model);
@@ -49,6 +50,8 @@ angular.module('icedaxJwplayerApp')
       $scope.selectedImage = -1;
       $scope.model = CreateCleanModel($scope.schema);
       $scope.masterCopy = angular.copy($scope.model);
+
+      angular.element('.selector').focus()
     };
 
     $scope.resetForm = function() {
@@ -76,7 +79,7 @@ angular.module('icedaxJwplayerApp')
       { key: 'name' },
       { key: 'description' },
       { key: 'imageurl',
-        ngModelOptions: { updateOn: 'default ' }
+        ngModelOptions: { updateOn: 'default' }
       },
       { key: 'cost' },
       { key: 'position' } /*,
@@ -114,8 +117,9 @@ angular.module('icedaxJwplayerApp')
       // Then we check if the form is valid
       if (form.$valid) {
         $log.log('Submiting All is valid', $scope.model);
+        var isNew = $scope.selectedImage === -1;
 
-        if ($scope.selectedImage === -1) {
+        if (isNew) {
           videoData.data.items.push($scope.model);
           $scope.selectedImage = videoData.data.items.length-1;
         }
@@ -131,7 +135,12 @@ angular.module('icedaxJwplayerApp')
           return 0;
         });
 
-        $scope.selectedImage = videoData.data.items.indexOf($scope.model);
+        if (isNew) {
+          $scope.newProduct();
+        }
+        else {
+          $scope.selectedImage = videoData.data.items.indexOf($scope.model);
+        }
 
         return true;
       }
@@ -155,5 +164,10 @@ angular.module('icedaxJwplayerApp')
       $location.path('/edit/videoEdit/videoEdit_Publish');
     };
 
-    setSelectedImage(0);
+    if (videoData.data.items > 0) {
+      setSelectedImage(0);
+    }
+    else {
+      $scope.newProduct();
+    }
   });

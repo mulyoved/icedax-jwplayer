@@ -16,26 +16,34 @@
             </div>
         </div>
     </div>
-
-    <div class="col-sm-offset-2 col-sm-8">
-        <h1>Product</h1>
-        <form name="product.form"
-              sf-schema="schema"
-              sf-form="form"
-              sf-model="model"
-              class="form-horizontal make-form-horizontal"
-              ng-submit="onSubmit(product.form)">
-        </form>
-    </div>
 </div>
 
-<div class="row margin-top-10">
-    <div class="col-md-10 text-right">
-        <button class="btn btn-lg" ng-disabled="!product.form.$dirty" ng-click="resetForm()">Undo <i class="fa fa-undo"></i></button>
-        <button class="btn btn-primary btn-lg"
-                ng-disabled="items.length==0"
-                ng-click="next()"
-                >Next: Publish Video <i class="glyphicon glyphicon-chevron-right"></i>
-        </button>
+<form
+    name="product.form"
+    ng-submit="onSubmit(product.form)">
+
+    <div>
+        <div class="col-sm-offset-2 col-sm-8">
+            <h1>Product</h1>
+                <div
+                      sf-schema="schema"
+                      sf-form="form"
+                      sf-model="model"
+                      class="form-horizontal make-form-horizontal">
+                </div>
+        </div>
     </div>
-</div>
+
+    <div class="row margin-top-10">
+        <div class="col-md-10 text-right">
+            <input type="submit" value="Submit">
+            <button class="btn btn-lg" ng-disabled="!product.form.$dirty" ng-click="resetForm()">Undo <i class="fa fa-undo"></i></button>
+            <button class="btn btn-primary btn-lg"
+                    ng-disabled="items.length==0"
+                    ng-click="next()"
+                    >Next: Publish Video <i class="glyphicon glyphicon-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+</form>

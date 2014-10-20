@@ -3,17 +3,16 @@
 angular.module('icedaxJwplayerApp')
   .controller('VideoeditSelectCtrl', function ($scope, $location, $log, videoData, videoList) {
 
-    $scope.url = false;
+    $scope.videoData = videoData;
     $scope.selectedVideo = null;
 
     $scope.$watch('selectedVideo', function(data) {
       if (data) {
-        var url = '//www.youtube.com/watch?v=' + data.originalObject.id.videoId;
+        var url = 'www.youtube.com/watch?v=' + data.originalObject.id.videoId;
         $log.log('Selected new video', data, url);
         $scope.selectVideo(url, data.title, data.image);
       }
     });
-
 
     $scope.searchYouTubeParams = function(q) {
       $log.log('searchYouTube', q);
@@ -42,21 +41,27 @@ angular.module('icedaxJwplayerApp')
       return { items: results };
     };
 
+    function showVideo() {
+      $log.log('showVideo', videoData.data.url);
+
+
+      jwplayer('playerNqOtsMizrHdj').setup({
+        file: '//' + videoData.data.url,
+        title: videoData.data.title,
+        width: '640',
+        height: '360'
+      });
+    }
+
     $scope.selectVideo = function(url, title, image) {
       $log.log('selectVideo', url, title, image);
 
       $scope.url = url;
 
-      videoData.url = url;
-      videoData.title = title;
-      videoData.image = image;
-
-      jwplayer('playerNqOtsMizrHdj').setup({
-        file: url,
-        title: 'Function - Psychic Warfare',
-        width: '640',
-        height: '360'
-      });
+      videoData.data.url = url;
+      videoData.data.title = title;
+      videoData.data.image = image;
+      showVideo();
     };
 
     $scope.next = function() {
@@ -64,7 +69,14 @@ angular.module('icedaxJwplayerApp')
     };
 
     $scope.selectExistingVideo = function(video) {
-      $scope.selectVideo('//'+video.url, video.title, video.image);
+      //$scope.selectVideo('//'+video.url, video.title, video.image);
+
+      videoData.get(video._id).then(function(data) {
+        $log.log('selectExistingVideo', video);
+        showVideo();
+      }, function(err) {
+        $log.error('Failed to retrive video', video._id);
+      })
     };
 
     $scope.videos = videoList; //[ 1,2,3,4,5];

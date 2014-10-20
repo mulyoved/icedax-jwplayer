@@ -17,7 +17,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     injector: 'grunt-asset-injector',
-    buildcontrol: 'grunt-build-control'
+    buildcontrol: 'grunt-build-control',
+    ngconstant: 'grunt-ng-constant'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -181,6 +182,27 @@ module.exports = function (grunt) {
           src: '{,*/}*.css',
           dest: '.tmp/'
         }]
+      }
+    },
+
+    ngconstant: {
+      options: {
+        name: 'config',
+        dest: 'client/app/config.js',
+        constants: {
+          config_package: grunt.file.readJSON('package.json')
+        },
+        values: {
+          config_debug: true
+        }
+      },
+      development: {
+
+      },
+      build: {
+        values: {
+          config_debug: false
+        }
       }
     },
 
@@ -562,6 +584,9 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('serve', function (target) {
+
+    console.log('# serve', target);
+
     if (target === 'dist') {
       return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
     }
@@ -580,6 +605,7 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+      'ngconstant:development',
       'clean:server',
       'env:all',
       'injector:sass', 
@@ -642,6 +668,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build', [
+    'ngconstant:build',
     'clean:dist',
     'injector:sass', 
     'concurrent:dist',

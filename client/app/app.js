@@ -7,6 +7,7 @@ angular.module('icedaxJwplayerApp', [
   'ui.router',
   'ui.bootstrap',
   'restangular',
+  'config',
   'angucomplete-alt',
   'schemaForm',
   '720kb.socialshare',
@@ -65,7 +66,10 @@ angular.module('icedaxJwplayerApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth, $log, $urlRouter, $state, $injector) {
+  .run(function ($rootScope, $location, Auth, $log, $urlRouter, $state, $injector, config_debug) {
+
+    $log.log('App run, config debug', config_debug);
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next, toParams, fromState, fromParams) {
 
@@ -73,11 +77,16 @@ angular.module('icedaxJwplayerApp', [
         return angular.isObject(value) && value.then;
       }
 
-
       //console.log('$stateChangeStart to '+next.to+'- fired when the transition begins. toState,toParams : \n',next, toParams);
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
+          event.preventDefault();
           $location.path('/login');
+        }
+        else if (loggedIn && next.name == 'lendingPage') {
+          //$log.log('next', next);
+          event.preventDefault();
+          $location.path('/edit/videoEdit/videoEdit_Select');
         }
       });
 
@@ -98,6 +107,10 @@ angular.module('icedaxJwplayerApp', [
           });
         }
       }
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+      $log.log('$stateChangeSuccess', toState);
     });
 
     /* debug ui-router

@@ -6,41 +6,43 @@
             <img class="video-area" src="http://placehold.it/120x120/&text=image1">
             -->
 
-            <iframe width="560" height="315" src="embededVideoDB/543c133852e49e6821672e93" frameborder="0" allowfullscreen scrolling="no"></iframe>
+            <iframe width="560" height="315" ng-src="{{iframeVideoUrl}}" frameborder="0" allowfullscreen scrolling="no"></iframe>
         </div>
     </div>
-    <div class="row">
+
+
+    <div class="col-sm-offset-2 row col-sm-8">
         <div class="col-sm-2">
             <div class="line-compress">
-                <button class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="facebook" socialshare-url="http://720kb.net">
+                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="facebook" socialshare-url="{{shareUrl}}">
                     <i class="fa fa-facebook"></i> Facebook
-                </button>
+                </a>
             </div>
         </div>
         <div class="col-sm-2">
             <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="twitter" socialshare-text="Woa" socialshare-url="http://720kb.net" socialshare-hashtags="720kb, development, angularjs, opensource">
+                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="twitter" socialshare-text="{{shareText}}" socialshare-url="{{shareUrl}}" socialshare-hashtags="720kb, development, angularjs, opensource">
                     <i class="fa fa-twitter"></i> Twitter
                 </a>
             </div>
         </div>
         <div class="col-sm-2">
             <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="google+" socialshare-url="http://720kb.net">
+                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="google+" socialshare-url="{{shareUrl}}">
                     <i class="fa fa-google-plus"></i>  Google +
                 </a>
             </div>
         </div>
         <div class="col-sm-2">
             <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="linkedin" socialshare-text="720kb.net" socialshare-url="http://720kb.net">
+                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="linkedin" socialshare-text="{{shareText}}" socialshare-url="{{shareUrl}}">
                     <i class="fa fa-linkedin"></i> Linkedin
                 </a>
             </div>
         </div>
         <div class="col-sm-2">
             <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="pinterest" socialshare-text="Woa!" socialshare-media="http://720kb.net/assets/img/logo.png" socialshare-url="http://720kb.net">
+                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="pinterest" socialshare-text="{{shareText}}" socialshare-media="{{shareImage}}" socialshare-url="{{shareUrl}}">
                     <i class="fa fa-pinterest"></i>  Pinterest
                 </a>
             </div>

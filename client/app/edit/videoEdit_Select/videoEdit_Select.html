@@ -27,14 +27,14 @@
     <div class="col-md-10 text-right">
         <button class="btn btn-primary btn-lg"
                 ng-click="next()"
-                ng-disabled="!url"
+                ng-disabled="!videoData.data.url"
                 >Next: Define Products <i class="glyphicon glyphicon-chevron-right"></i>
         </button>
     </div>
 </div>
 
 <div class="row margin-top-10">
-    <div class="col-lg-3 col-sm-4 col-xs-6" ng-repeat="img in videos">
+    <div class="col-lg-2 col-sm-3 col-xs-6" ng-repeat="img in videos">
         <button class="col-centered thumbnail" ng-click="selectExistingVideo(img)">
             <img ng-src="{{img.image}}" class="img-responsive">
         </button>
