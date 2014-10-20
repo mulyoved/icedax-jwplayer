@@ -1,0 +1,63 @@
+$image-frame-size: 4px;
+$image-frame-size-half: 2px;
+
+#video-box {
+  width: 600px;
+  height: 400px;
+  background-color: red;
+  position: relative;
+}
+
+.det-video-glass {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: blue; // transparent;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  //opacity: 0.15;
+  //text-align: center;
+  z-index: 11; /* 1px higher than the overlay layer */
+  pointer-events: none;
+}
+
+.det-detail-panel {
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: 0.85;
+
+  background-color: orange;
+  padding-top: $image-frame-size;
+  padding-bottom: $image-frame-size;
+  padding-left: $image-frame-size;
+
+  overflow: hidden;
+  z-index: 11; /* 1px higher than the overlay layer */
+
+}
+
+.det-detail-image {
+  height: 100%;
+  right: 0;
+  margin: auto;
+  margin-right: $image-frame-size;
+
+  pointer-events: auto;
+  cursor: pointer;
+  box-sizing: border-box;
+  //border: 5px solid black;
+}
+
+
+.det-detail-panel h3 {
+  position: absolute;
+}

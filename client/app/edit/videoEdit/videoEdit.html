@@ -1,0 +1,26 @@
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-10">
+        <nav>
+            <ul class="nav nav-pills">
+                <li ng-class="{ active: isActive('/edit/videoEdit/videoEdit_Select')}">
+                    <a ui-sref="edit.videoEdit.videoEdit_Select">Select YouTube Video</a>
+                </li>
+                <li ng-class="{ active: isActive('/edit/videoEdit/videoEdit_Products')}">
+                    <a ui-sref="edit.videoEdit.videoEdit_Products">Define Products</a>
+                </li>
+                <li ng-class="{ active: isActive('/edit/videoEdit/videoEdit_Publish')}">
+                    <a ui-sref="edit.videoEdit.videoEdit_Publish">Publish!</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<ui-view></ui-view>
+
+
+
+<!--
+              sf-options="{ formDefaults: { ngModelOptions: { updateOn: 'blur' } }}"
+-->

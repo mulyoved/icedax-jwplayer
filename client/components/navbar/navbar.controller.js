@@ -33,7 +33,7 @@ angular.module('icedaxJwplayerApp')
       },
       {
         'title': 'Embeded DB',
-        'link': '/embededVideoDB/543c133852e49e6821672e93'
+        'link': '/embededVideoDB/5443c871f35b382c266fd1a7'
       },
       {
         'title': 'InsideIFrame',

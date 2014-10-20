@@ -1,0 +1,88 @@
+
+.product-icons {
+}
+
+.product-icon {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  width: 120px;
+  margin: 5px;
+}
+
+.new-icon {
+  text-align: center;
+  line-height: 120px;
+  height: 120px;
+  font-size: 18px;
+  position: absolute;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.new-icon.glyphicon {
+  line-height: 120px;
+}
+
+.product-icon.selected-icon {
+  border: 5px solid black;
+}
+
+.image-panel {
+  width: 90%;
+  height: 140px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.85;
+
+  margin-top: 20px;
+  //background-color: orange;
+  padding-top: $image-frame-size;
+  padding-bottom: $image-frame-size;
+  padding-left: $image-frame-size;
+
+  overflow: hidden;
+  z-index: 11; /* 1px higher than the overlay layer */
+
+}
+
+.float-wrap {
+  width: 10000px;
+  height: 100%;
+  //border:1px solid;
+  /* causes .float-wrap's height to match its child divs */
+  overflow: auto;
+}
+
+.make-form-horizontal {
+}
+
+
+.make-form-horizontal .control-label {
+  @include make-sm-column(3);
+}
+
+.make-form-horizontal .form-control {
+  @include make-sm-column(9);
+}
+
+
+.make-form-horizontal .help-block {
+  @include make-sm-column-offset(3);
+  @include make-sm-column(9);
+}
+
+//Not sure but fix the icon place
+.form-horizontal .has-feedback .form-control-feedback {
+  top: 0;
+  right: 0px;
+}
+
+
+
+/*
+.hide-description .help-block {
+  display: none;
+}
+*/

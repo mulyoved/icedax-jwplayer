@@ -1,0 +1,13 @@
+<div id='playerADWzMGbKsCCQ'>
+</div>
+<div id="video-glass" class="video-glass" ng-show="showCarousel" ng-click="glassClick($event)">
+    <div class="image-panel">
+        <div class="float-wrap">
+            <img ng-repeat="image in images"
+                 class="pa-img"
+                 ng-class="isSelected($index)"
+                 ng-click="imageClick($index, $event)"
+                 ng-src="{{image.imageurl}}">
+        </div>
+    </div>
+</div>

@@ -36,20 +36,23 @@ angular.module('icedaxJwplayerApp', [
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
+  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location, $log) {
     return {
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
+        if ($cookieStore.get('token') && config.url.indexOf('http')<0) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
         }
         return config;
       },
 
       // Intercept 401s and redirect you to login
+
+
       responseError: function(response) {
-        if(response.status === 401) {
+        $log.log('responseError', response);
+        if(response.status === 401 && response.config.url.indexOf('googleapis.com')<0) {
           $location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');

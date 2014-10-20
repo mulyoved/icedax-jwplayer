@@ -1,0 +1,79 @@
+.angucomplete-dropdown {
+  overflow-x: hidden;
+  background: #f5f5f5;
+}
+
+.angucomplete-row {
+  cursor: pointer;
+  min-height: 100px;
+  padding: 10px;
+  padding-left: 140px;
+  position: relative;
+}
+
+.angucomplete-row:nth-child(2n-1) {
+  background: white;
+}
+
+.angucomplete-row:hover {
+  background: #22242a;
+  color: white;
+}
+
+.angucomplete-image-holder {
+}
+
+.angucomplete-image {
+  float: left;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  max-height: 90px;
+}
+
+.angucomplete-title {
+  padding-top: 5px;
+}
+
+.angucomplete-description {
+  color: #727785;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.mixin-row {
+  @include make-row();
+}
+
+.mixin-col-md-4 {
+  @include make-md-column(4);
+}
+
+.mixin-col-md-8 {
+  @include make-md-column(8);
+}
+
+
+.make-form-horizontal {
+}
+
+
+.make-form-horizontal .control-label {
+  @include make-sm-column(2);
+}
+
+.make-form-horizontal .form-control {
+  @include make-sm-column(10);
+}
+
+
+.make-form-horizontal .help-block {
+  @include make-sm-column-offset(2);
+  @include make-sm-column(10);
+}
+
+/*
+.hide-description .help-block {
+  display: none;
+}
+*/

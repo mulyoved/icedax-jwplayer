@@ -1,0 +1,42 @@
+<div class="row margin-top">
+    <div class="form-group col-sm-offset-2 col-sm-8">
+        <label clas="control-label">Select YouTube Video</label>
+        <angucomplete-alt id="members"
+                          class="video-select-box"
+                          placeholder="Search For a YouTube Video"
+                          pause="400"
+                          selected-object="selectedVideo"
+                          remote-url="https://www.googleapis.com/youtube/v3/search"
+                          remote-url-request-formatter="searchYouTubeParams"
+                          remote-url-response-formatter="getYouTubeResults"
+                          remote-url-data-field="items"
+                          title-field="title"
+                          image-field="image"
+                          input-class="form-control form-control-small">
+        </angucomplete-alt>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-offset-2 col-sm-8 video-min-size">
+        <div id='playerNqOtsMizrHdj'></div>
+    </div>
+</div>
+
+<div class="row margin-top-10">
+    <div class="col-md-10 text-right">
+        <button class="btn btn-primary btn-lg"
+                ng-click="next()"
+                ng-disabled="!url"
+                >Next: Define Products <i class="glyphicon glyphicon-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<div class="row margin-top-10">
+    <div class="col-lg-3 col-sm-4 col-xs-6" ng-repeat="img in videos">
+        <button class="col-centered thumbnail" ng-click="selectExistingVideo(img)">
+            <img ng-src="{{img.image}}" class="img-responsive">
+        </button>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+$image-frame-size: 4px;
+$image-frame-size-half: 2px;
+
+#video-box {
+  width: 600px;
+  height: 400px;
+  background-color: red;
+  position: relative;
+}
+
+.xvideo-glass {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: dimgray; // transparent;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  //opacity: 0.15;
+  text-align: center;
+  z-index: 11; /* 1px higher than the overlay layer */
+  pointer-events: none;
+}
+
+.ximage-panel {
+  width: 90%;
+  height: 20%;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  bottom: 45px;
+  opacity: 0.85;
+
+  background-color: orange;
+  padding-top: $image-frame-size;
+  padding-bottom: $image-frame-size;
+  padding-left: $image-frame-size;
+
+  overflow: hidden;
+  z-index: 11; /* 1px higher than the overlay layer */
+
+}
+
+.xfloat-wrap {
+  width: 10000px;
+  height: 100%;
+  //border:1px solid;
+  /* causes .float-wrap's height to match its child divs */
+  overflow: auto;
+}
+
+.xpa-img {
+  height: 100%;
+  margin-right: $image-frame-size;
+
+  pointer-events: auto;
+  cursor: pointer;
+  box-sizing: border-box;
+  //border: 5px solid black;
+}
+
+.xselected-img {
+  border: 3px solid black;
+}
+
+.p-hidden {
+  visible: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 1s, opacity 1s;
+  -moz-transition: visibility 1s, opacity 1s;
+  -o-transition: visibility 1s, opacity 1s;
+  transition: visibility 1s, opacity 1s;
+}

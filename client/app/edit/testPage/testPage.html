@@ -1,0 +1,126 @@
+<div class="col-md-12">
+    <h1>Test Page (v15)</h1>
+    <button class="btn btn-default" ng-click="getUser()">Get User</button>
+    <h2>DB</h2>
+    <button class="btn btn-default" ng-click="saveVideoToDB()">Save Video to DB</button>
+    <button class="btn btn-default" ng-click="retriveVideoFromDB()">Retrive Video from DB</button>
+    <button class="btn btn-default" ng-click="retriveAllVideoFromDB()">Retrive All Video from DB</button>
+    <button class="btn btn-default" ng-click="retriveUserVideoFromDB()">Retrive User Video from DB</button>
+    <h2>DB with Service</h2>
+    <button class="btn btn-default" ng-click="service_saveVideoToDB()">Save Video to DB</button>
+    <button class="btn btn-default" ng-click="service_retriveVideoFromDB()">Retrive Video from DB</button>
+    <button class="btn btn-default" ng-click="service_updateExistingVideoFromDB()">Update Existing Video from DB</button>
+    <h2>Messages</h2>
+    <button class="btn btn-default" ng-click="showMessage()">Send Message to Message Center</button>
+    <button class="btn btn-default">Send Error Message to Message Center</button>
+    <br>
+    <button class="btn btn-default" ng-click="goToAdmin()">Admin Page</button>
+    <button class="btn btn-default" ng-click="getYouTubeSearch()">getYouTubeSearch</button>
+
+    <angucomplete-alt id="members"
+                      placeholder="Search For a YouTube Video"
+                      pause="400"
+                      selected-object="testObj"
+                      remote-url="https://www.googleapis.com/youtube/v3/search"
+                      remote-url-request-formatter="searchYouTubeParams"
+                      remote-url-response-formatter="getYouTubeResults"
+                      remote-url-data-field="items"
+                      title-field="title"
+                      description-field="description"
+                      image-field="image"
+                      input-class="form-control form-control-small"
+     ></angucomplete-alt>
+
+    <p>Selected: {{testObj}}</p>
+
+    <h3>Grid</h3>
+    <div class="row">
+        <div class="col-md-4">.col-md-4</div>
+        <div class="col-md-8">
+            <div class="row">
+                .col-md-8 row 1
+            </div>
+            <div class="row">
+                .col-md-8 row 2
+            </div>
+        </div>
+    </div>
+
+    <h3>Grid by Mixin</h3>
+    <div class="mixin-row">
+        <div class="mixin-col-md-4">.col-md-4</div>
+        <div class="mixin-col-md-8">
+            <div class="mixin-row">
+                .col-md-8 row 1
+            </div>
+            <div class="mixin-row">
+                .col-md-8 row 2
+            </div>
+        </div>
+    </div>
+
+    <h1>Form</h1>
+    <form class="form-horizontal make-form-horizontal"
+          name="product.form"
+          sf-schema="schema"
+          sf-form="form"
+          sf-model="model"
+          ng-submit="onSubmit(product.form)">
+    </form>
+
+    <h1>Bootstrap Form</h1>
+    <form role="form">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">File input</label>
+            <input type="file" id="exampleInputFile">
+            <p class="help-block">Example block-level help text here.</p>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Check me out
+            </label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+    <h1>Bootstrap Form form-horizontal</h1>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
+    </form>
+
+<!--
+remote-url="http://myserver.com/api/user/find?s="
+-->
