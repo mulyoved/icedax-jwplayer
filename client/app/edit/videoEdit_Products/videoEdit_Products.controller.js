@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('icedaxJwplayerApp')
-  .controller('VideoeditProductsCtrl', function ($scope, $log, $location, videoData) {
+  .controller('VideoeditProductsCtrl', function ($scope, $log, $location, videoData, config_debug) {
     $scope.selectedImage = -1;
     $scope.items = videoData.data.items;
+    $scope.config_debug = config_debug;
 
     $scope.isSelected = function(idx) {
       return (idx === $scope.selectedImage ? 'selected-icon' : null);
@@ -14,17 +15,23 @@ angular.module('icedaxJwplayerApp')
     };
 
     function setSelectedImage(idx) {
-      $log.log('setSelectedImage', idx);
-      $scope.selectedImage = idx;
-      $scope.model = videoData.data.items[idx];
-      $scope.masterCopy = angular.copy($scope.model);
+      if (idx === -1) {
+        $scope.newProduct();
+      }
+      else {
+        $log.log('setSelectedImage', idx);
+        $scope.selectedImage = idx;
+        $scope.model = videoData.data.items[idx];
+        $scope.masterCopy = angular.copy($scope.model);
+        $scope.product.form.$setPristine();
+      }
     }
 
     $scope.imageClick = function(idx, $event) {
-      $log.log('imageClick', idx);
-      var image = videoData.data.items[idx];
+      $log.log('imageClick', idx, $scope.product.form.$pristine);
 
-      if ($scope.selectedImage === idx) {
+      if ($scope.selectedImage === idx && idx !== -1) {
+        var image = videoData.data.items[idx];
         $log.log('open external url', image.url);
       }
       else {
@@ -46,12 +53,12 @@ angular.module('icedaxJwplayerApp')
     }
 
     $scope.newProduct = function() {
-      $log.log('New Product');
+      //$log.log('New Product');
       $scope.selectedImage = -1;
       $scope.model = CreateCleanModel($scope.schema);
       $scope.masterCopy = angular.copy($scope.model);
 
-      angular.element('.selector').focus()
+      angular.element('.selector').focus();
     };
 
     $scope.resetForm = function() {
@@ -109,37 +116,60 @@ angular.module('icedaxJwplayerApp')
       $scope.save(form);
     };
 
+    var formIsEmpty = function() {
+      var isEmpty = true;
+      angular.forEach($scope.model, function(value, key) {
+        if (!angular.isUndefined(value)) {
+          isEmpty = false;
+        }
+      });
+
+      return isEmpty;
+    };
+
+    $scope.updateItem = function() {
+      $log.log('Update Item', $scope.model);
+      var isNew = $scope.selectedImage === -1;
+
+      if (isNew) {
+        videoData.data.items.push($scope.model);
+        $scope.selectedImage = videoData.data.items.length-1;
+      }
+      else {
+        videoData.data.items[$scope.selectedImage] = $scope.model;
+      }
+
+      videoData.data.items.sort(function(a,b) {
+        if (a.position < b.position)
+          return -1;
+        if (a.position > b.position)
+          return 1;
+        return 0;
+      });
+
+      $scope.selectedImage = videoData.data.items.indexOf($scope.model);
+    };
+
     $scope.save = function(form) {
       $log.log('Submiting', form, $scope.model);
+
       // First we broadcast an event so all fields validate themselves
       $scope.$broadcast('schemaFormValidate');
 
+      if (formIsEmpty()) {
+        return true;
+      }
+
       // Then we check if the form is valid
       if (form.$valid) {
-        $log.log('Submiting All is valid', $scope.model);
-        var isNew = $scope.selectedImage === -1;
-
-        if (isNew) {
-          videoData.data.items.push($scope.model);
-          $scope.selectedImage = videoData.data.items.length-1;
-        }
-        else {
-          videoData.data.items[$scope.selectedImage] = $scope.model;
-        }
-
-        videoData.data.items.sort(function(a,b) {
-          if (a.position < b.position)
-            return -1;
-          if (a.position > b.position)
-            return 1;
-          return 0;
-        });
+        $scope.updateItem();
 
         if (isNew) {
           $scope.newProduct();
         }
         else {
           $scope.selectedImage = videoData.data.items.indexOf($scope.model);
+          $scope.product.form.$setPristine();
         }
 
         return true;
@@ -169,5 +199,38 @@ angular.module('icedaxJwplayerApp')
     }
     else {
       $scope.newProduct();
-    }
+    };
+
+    $scope.fillSampleData = function() {
+      var id = $scope.items.length + 1;
+      $scope.model.url = 'https://www.kickstarter.com/projects/getify/you-dont-know-js-book-series';
+      $scope.model.name = 'Product' + id;
+      $scope.model.description = 'Product' + id;
+      $scope.model.imageurl = 'http://placehold.it/120x120/ffffff/000000/&text=' + $scope.model.name;
+      $scope.model.cost = 10 + id ;
+      $scope.model.position = 30 * id;
+    };
+
+    $scope.deleteProduct = function() {
+      if ($scope.selectedImage === -1) {
+        $scope.resetForm();
+      }
+      else {
+        videoData.data.items.splice($scope.selectedImage, 1);
+        if ($scope.selectedImage >= videoData.data.items.length) {
+          setSelectedImage(videoData.data.items.length-1);
+        }
+      }
+    };
+
+    $scope.$watch('model.imageurl', function() {
+      //$log.log('model.imageurl', $scope.model.imageurl);
+      if (!angular.isUndefined($scope.model.imageurl) && $scope.model.imageurl.length > 4) {
+        $scope.updateItem();
+      }
+    });
+
+    videoData._isModelValid = function() {
+      return ($scope.product.form.$pristine || $scope.save($scope.product.form));
+    };
   });

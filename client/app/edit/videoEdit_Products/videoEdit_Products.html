@@ -9,7 +9,7 @@
                      ng-src="{{image.imageurl}}">
 
                 <div class="product-icon new-icon"
-                     ng-click="newProduct()"
+                     ng-click="imageClick(-1, $event)"
                      ng-class="isNewSelected()">
                     <i class="glyphicon glyphicon-plus"></i> New
                 </div>
@@ -20,6 +20,7 @@
 
 <form
     name="product.form"
+    ng-keyup="$event.keyCode == 13 && onSubmit(product.form)"
     ng-submit="onSubmit(product.form)">
 
     <div>
@@ -34,16 +35,23 @@
         </div>
     </div>
 
-    <div class="row margin-top-10">
-        <div class="col-md-10 text-right">
-            <input type="submit" value="Submit">
-            <button class="btn btn-lg" ng-disabled="!product.form.$dirty" ng-click="resetForm()">Undo <i class="fa fa-undo"></i></button>
-            <button class="btn btn-primary btn-lg"
-                    ng-disabled="items.length==0"
-                    ng-click="next()"
-                    >Next: Publish Video <i class="glyphicon glyphicon-chevron-right"></i>
-            </button>
-        </div>
-    </div>
-
 </form>
+
+<div class="row margin-top-10">
+    <div class="col-md-10 text-right">
+        <!-- <input type="submit" class="btn btn-lg" value="Submit"> -->
+        <button class="btn btn-lg" ng-click="deleteProduct()">Delete Product <i class="fa fa-trash"></i></button>
+        <button class="btn btn-primary btn-lg"
+                ng-disabled="items.length===0"
+                ng-click="next()"
+                >Next: Publish Video <i class="glyphicon glyphicon-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<div ng-if="config_debug" >
+    <button class="btn btn-lg" ng-click="fillSampleData()">Fill Sample Data</button>
+    <pre>{{items}}</pre>
+    <pre>selectedImage: {{selectedImage}}</pre>
+    <pre>valid: {{product.form.$valid}} {{product.form.$pristine}}</pre>
+</div>

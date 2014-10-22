@@ -8,11 +8,15 @@ angular.module('icedaxJwplayerApp')
         templateUrl: 'app/edit/videoEdit_Products/videoEdit_Products.html',
         controller: 'VideoeditProductsCtrl',
         onExit: function(videoData) {
-          console.log('onExit', videoData.items);
+          //console.log('onExit', videoData.data.items);
         },
 
         onExitResolve: function(videoData, $timeout, $q, $log) {
           return videoData.save();
+        },
+
+        canExit: function(videoData) {
+          return videoData.isModelValid();
         }
       });
   });

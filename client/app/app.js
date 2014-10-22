@@ -7,12 +7,18 @@ angular.module('icedaxJwplayerApp', [
   'ui.router',
   'ui.bootstrap',
   'restangular',
+  'ngClipboard',
+  'unsavedChanges',
   'config',
   'angucomplete-alt',
   'schemaForm',
   '720kb.socialshare',
   'MessageCenterModule'
 ])
+  .config(['ngClipProvider', function (ngClipProvider) {
+    ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
+  }])
+
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
@@ -73,6 +79,8 @@ angular.module('icedaxJwplayerApp', [
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next, toParams, fromState, fromParams) {
 
+      //$log.log('$stateChangeStart', fromState, next, event);
+
       function isResolve(value) {
         return angular.isObject(value) && value.then;
       }
@@ -90,6 +98,15 @@ angular.module('icedaxJwplayerApp', [
         }
       });
 
+      if (fromState.canExit) {
+        var canExit = $injector.invoke(fromState.canExit);
+        if (!canExit) {
+          $log.log('canExit return false, cancel exit event', fromState);
+          event.preventDefault();
+        }
+      }
+
+      /*
       if (next.onExitResolve) {
         next.ignoreOnExitResolve = false;
       }
@@ -104,14 +121,24 @@ angular.module('icedaxJwplayerApp', [
             $log.log('Handling onExitResolve - sync', next, toParams);
             fromState.ignoreOnExitResolve = true;
             $state.go(next);
+          }, function(err) {
+            $log.error('Failed to execute exitResolve', err);
+
+            //Should have popup and retry but for now I just ignore the error
+            next.ignoreOnExitResolve = true;
+            $state.go(next);
           });
         }
       }
+      */
     });
 
+    /*
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
       $log.log('$stateChangeSuccess', toState);
     });
+    */
+
 
     /* debug ui-router
     $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
@@ -159,4 +186,18 @@ angular.module('icedaxJwplayerApp', [
     RestangularProvider.setRestangularFields({
       id: "_id"
     });
-  });
+  })
+
+  //from http://stackoverflow.com/questions/15882326/angular-onload-function-on-an-iframe
+  .directive('iframeOnload', [function(){
+    return {
+      scope: {
+        callBack: '&iframeOnload'
+      },
+      link: function(scope, element, attrs){
+        element.on('load', function(){
+          return scope.callBack();
+        })
+      }
+    }}
+  ]);

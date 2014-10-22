@@ -122,7 +122,7 @@ angular.module('icedaxJwplayerApp')
     };
 
     $scope.retriveVideoFromDB = function() {
-      var id = "5443c871f35b382c266fd1a7"; // 6373;
+      var id = "5447a9df6db379681089e842"; // 6373;
       var video = Restangular.one('videos', id).get().then(function(answer) {
         $log.log('retriveVideoFromDB', answer);
       });
@@ -144,7 +144,15 @@ angular.module('icedaxJwplayerApp')
       });
     };
 
-    $scope.service_saveVideoToDB = function() {
+    $scope.service_saveSameVideoToDB = function() {
+      videoData.save().then(function(answer) {
+        $log.log('save', answer);
+      }, function(err) {
+        $log.error('failed to save');
+      });
+    };
+
+    $scope.service_saveNewVideoToDB = function() {
       videoData.create();
       videoData.data.id = 12;
       videoData.data.items = [
@@ -160,9 +168,10 @@ angular.module('icedaxJwplayerApp')
     };
 
     $scope.service_retriveVideoFromDB = function() {
-      var id = '543b96a9ac17c6542b892423';
+      var id = '5447a9df6db379681089e842';
       videoData.get(id).then(function(answer) {
         $log.log('retrived', answer);
+        $log.log('retrived', videoData.data);
       }, function(err) {
         $log.error('failed to get');
       });

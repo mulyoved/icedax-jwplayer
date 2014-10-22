@@ -6,46 +6,73 @@
             <img class="video-area" src="http://placehold.it/120x120/&text=image1">
             -->
 
-            <iframe width="560" height="315" ng-src="{{iframeVideoUrl}}" frameborder="0" allowfullscreen scrolling="no"></iframe>
+            <div ng-show="saveMessage" class="edit-publish-waitmessage"><h2>{{saveMessage}}</h2></div>
+            <iframe
+                    iframe-onload="iframeLoaded()"
+                    ng-show="!saveMessage"
+                    width="560" height="315"
+                    ng-src="{{iframeVideoUrl}}"
+                    frameborder="0"
+                    allowfullscreen scrolling="no">
+
+                    </iframe>
         </div>
     </div>
 
+    <div ng-show="!saveMessage">
+        <div class="row col-sm-offset-2 col-sm-8">
+            <div class="form-inline">
+                <input class="form-control" type="text" ng-model="shareUrlValue">
+                <button class="btn btn-primary btn-md" clip-copy="shareUrl" ng-click="copyToClipboard()">Copy to Clipboard</button>
+            </div>
+        </div>
 
-    <div class="col-sm-offset-2 row col-sm-8">
-        <div class="col-sm-2">
-            <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="facebook" socialshare-url="{{shareUrl}}">
-                    <i class="fa fa-facebook"></i> Facebook
-                </a>
+        <div class="row col-sm-offset-2 col-sm-8">
+            <div class="col-sm-2">
+                <div class="line-compress">
+                    <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="facebook" socialshare-url="{{shareUrl}}">
+                        <i class="fa fa-facebook"></i> Facebook
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="twitter" socialshare-text="{{shareText}}" socialshare-url="{{shareUrl}}" socialshare-hashtags="720kb, development, angularjs, opensource">
-                    <i class="fa fa-twitter"></i> Twitter
-                </a>
+            <div class="col-sm-2">
+                <div class="line-compress">
+                    <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="twitter" socialshare-text="{{shareText}}" socialshare-url="{{shareUrl}}" socialshare-hashtags="720kb, development, angularjs, opensource">
+                        <i class="fa fa-twitter"></i> Twitter
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="google+" socialshare-url="{{shareUrl}}">
-                    <i class="fa fa-google-plus"></i>  Google +
-                </a>
+            <div class="col-sm-2">
+                <div class="line-compress">
+                    <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="google+" socialshare-url="{{shareUrl}}">
+                        <i class="fa fa-google-plus"></i>  Google +
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="linkedin" socialshare-text="{{shareText}}" socialshare-url="{{shareUrl}}">
-                    <i class="fa fa-linkedin"></i> Linkedin
-                </a>
+            <div class="col-sm-2">
+                <div class="line-compress">
+                    <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="linkedin" socialshare-text="{{shareText}}" socialshare-url="{{shareUrl}}">
+                        <i class="fa fa-linkedin"></i> Linkedin
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="line-compress">
-                <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="pinterest" socialshare-text="{{shareText}}" socialshare-media="{{shareImage}}" socialshare-url="{{shareUrl}}">
-                    <i class="fa fa-pinterest"></i>  Pinterest
-                </a>
+            <div class="col-sm-2">
+                <div class="line-compress">
+                    <a class="btn btn-medium center-content radius3 bg-white" socialshare="" socialshare-provider="pinterest" socialshare-text="{{shareText}}" socialshare-media="{{shareImage}}" socialshare-url="{{shareUrl}}">
+                        <i class="fa fa-pinterest"></i>  Pinterest
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+
+<div ng-if="config_debug" >
+    <pre>iframeVideoUrl: {{iframeVideoUrl}}</pre>
+    <pre>shareUrl: {{shareUrl}}</pre>
+    <pre>shareText: {{shareText}}</pre>
+    <pre>shareImage: {{shareImage}}</pre>
+    <pre>saveMessage: {{saveMessage}}</pre>
+
 </div>

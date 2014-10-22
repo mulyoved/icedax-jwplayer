@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('icedaxJwplayerApp')
-  .controller('NavbarCtrl', function ($scope, $location, $log, Auth) {
-    var devMode = false;
+  .controller('NavbarCtrl', function ($scope, $location, $log, Auth, config_debug) {
+    var devMode = config_debug;
 
     if (devMode) {
       $scope.menu = [

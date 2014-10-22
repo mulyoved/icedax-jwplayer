@@ -15,15 +15,21 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.10",
-    "message-center": "~1.0.2",
+    "message-center": "master",
     "angucomplete-alt": "~0.0.22",
     "angular-schema-form": "https://github.com/mulyoved/angular-schema-form.git#~0.7.3",
     "validator-js": "~3.19.0",
     "angular-socialshare": "https://github.com/mulyoved/angular-socialshare.git",
-    "restangular": "~1.4.0"
+    "restangular": "~1.4.0",
+    "angular-unsavedChanges": "https://github.com/mulyoved/angular-unsavedChanges.git#~0.1.1",
+    "zeroclipboard": "~2.1.6",
+    "ng-clip": "~0.2.4"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
     "angular-scenario": ">=1.2.*"
+  },
+  "resolutions": {
+    "angular": ">= 1.0.8"
   }
 }

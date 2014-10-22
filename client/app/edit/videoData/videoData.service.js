@@ -4,6 +4,7 @@ angular.module('icedaxJwplayerApp')
   .service('videoData', function (Restangular, $log, $q, config_debug) {
     var vd = this;
     this.dirty = false;
+    this._isModelValid = null;
 
     this.id = null;
     this.create = function() {
@@ -60,7 +61,11 @@ angular.module('icedaxJwplayerApp')
 
       if (this.data.fromServer) {
         this.data.put().then(function(answer) {
-          $log.log('Saved existing video', answer);
+          $log.log('videoData Saved existing video', answer, answer.__v);
+
+          vd.data = answer;
+          vd.id = answer._id;
+
           deferred.resolve(answer);
         }, function(err) {
           $log.error('Failed to save existing video', err);
@@ -69,7 +74,10 @@ angular.module('icedaxJwplayerApp')
       }
       else {
         Restangular.all('videos').post(this.data).then(function(answer) {
-          $log.log('Saved new video', answer);
+          $log.log('videoData Saved new video', answer, answer.__v);
+          vd.data = answer;
+          vd.id = answer._id;
+
           vd.id = answer._id;
           deferred.resolve(answer);
         }, function(err) {
@@ -86,6 +94,8 @@ angular.module('icedaxJwplayerApp')
       var deferred = $q.defer();
       var self = this;
       Restangular.one('videos', id).get().then(function(answer) {
+
+        $log.log('videoData get', answer._id, answer.__v);
         self.data = answer;
         self.id = answer._id;
         deferred.resolve(answer);
@@ -100,5 +110,14 @@ angular.module('icedaxJwplayerApp')
     this.list = function() {
       var videos = Restangular.all('videos');
       return videos.getList();
-    }
+    };
+
+    //Sort of hack, to be use n canExit to check if can navigate from the edit form
+    this.isModelValid = function() {
+      if (this._isModelValid) {
+        return this._isModelValid();
+      }
+
+      return true;
+    };
   });

@@ -3,7 +3,7 @@
 angular.module('icedaxJwplayerApp')
   .controller('EmbededvideodbCtrl', function ($scope, $log, $stateParams, Restangular) {
 
-    $log.log('$stateParams', $stateParams.videoId);
+    //$log.log('$stateParams', $stateParams.videoId);
 
     var elementReady = false;
     var videoDbId = $stateParams.videoId;
