@@ -3,6 +3,7 @@
 angular.module('icedaxJwplayerApp')
   .controller('TestpageCtrl', function ($scope, $location, $http, $log, Auth, messageCenterService, videoData, Restangular) {
     $scope.message = 'Hello';
+    $log.log('TestpageCtrl Started');
 
     $scope.showMessage = function() {
       messageCenterService.add('success', 'Your action has been completed!', { status: messageCenterService.status.permanent });
@@ -188,6 +189,22 @@ angular.module('icedaxJwplayerApp')
 
     $scope.getUser = function() {
       $log.log('Get user', Auth.getCurrentUser());
-    }
+    };
+
+    $scope.debugCode = function() {
+      $log.log('debugCode',1.9);
+    };
+
+    $scope.debugCode2 = function() {
+      $log.log('debugCode2',1.9);
+    };
+
+    $scope.debugCode3 = function() {
+      $log.log('debugCode3',1.99);
+    };
+
+    $scope.debugCode4 = function() {
+      $log.log('debugCode4',1.9);
+    };
 
   });

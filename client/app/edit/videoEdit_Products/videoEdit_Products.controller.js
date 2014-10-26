@@ -164,6 +164,7 @@ angular.module('icedaxJwplayerApp')
       if (form.$valid) {
         $scope.updateItem();
 
+        var isNew = $scope.selectedImage === -1;
         if (isNew) {
           $scope.newProduct();
         }

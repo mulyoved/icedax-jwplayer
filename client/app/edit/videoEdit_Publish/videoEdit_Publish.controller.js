@@ -41,7 +41,7 @@ angular.module('icedaxJwplayerApp')
       });
 
       $scope.copyToClipboard = function() {
-        messageCenterService.add('success', 'URL copied to clipboard', { status: messageCenterService.status.next });
+        //messageCenterService.add('success', 'URL copied to clipboard', { status: messageCenterService.status.next });
       };
     };
 
